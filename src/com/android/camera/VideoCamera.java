@@ -858,15 +858,8 @@ public class VideoCamera extends ActivityBase
             }
         }
 
-<<<<<<< HEAD
         setDisplayOrientation();
         mCameraDevice.setDisplayOrientation(mCameraDisplayOrientation);
-=======
-        mDisplayRotation = Util.getDisplayRotation(this);
-        int orientation = Util.getDisplayOrientation(mDisplayRotation, mCameraId);
-        mCameraDevice.setDisplayOrientation(orientation);
-        CameraSettings.setVideoMode(mParameters, true);
->>>>>>> e62c08c... Fix galaxys2 video recording
         setCameraParameters();
 
         try {
@@ -1872,6 +1865,7 @@ public class VideoCamera extends ActivityBase
                 CameraProfile.QUALITY_HIGH);
         mParameters.setJpegQuality(jpegQuality);
 
+        CameraSettings.dumpParameters(mParameters);
         mCameraDevice.setParameters(mParameters);
         // Keep preview size up to date.
         mParameters = mCameraDevice.getParameters();
@@ -2387,6 +2381,7 @@ public class VideoCamera extends ActivityBase
         mParameters.setRotation(rotation);
         Location loc = mLocationManager.getCurrentLocation();
         Util.setGpsParameters(mParameters, loc);
+        CameraSettings.dumpParameters(mParameters);
         mCameraDevice.setParameters(mParameters);
 
         Log.v(TAG, "Video snapshot start");
